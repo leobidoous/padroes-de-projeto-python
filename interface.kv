@@ -1,0 +1,149 @@
+#!text
+#:import Factory kivy.factory.Factory
+
+#:set color_button (0.784, 0.443, 0.216, 1)  # brown
+#:set color_button_pressed (0.659, 0.522, 0.431, 1)  # darker brown
+#:set color_font   (0.957, 0.890, 0.843, 1)  # off white
+
+<MySpinnerOption@SpinnerOption>:
+    background_color: color_button if self.state == 'down' else color_button_pressed
+    background_down: 'atlas://data/images/defaulttheme/button'
+    color: color_font
+
+<TelaPrincipal>:
+    canvas.before:
+        Color:
+            rgba: (0.659, 0.522, 0.431, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    Label:
+        text: "CONTROLE DE ALUNOS"
+        font_size: '30sp'
+        size_hint: .75, .05
+        color: [0,0,0,1]
+        pos_hint: {'center_x': .5, 'y':.9}
+
+    Spinner:
+        id: type_uni
+        text: "Universidades[color=ff3333] *[/color]"
+        values: ['PUC', 'UFG']
+        markup: True
+        value: []
+        background_color: color_button if self.state == 'normal' else color_button_pressed
+        background_down: 'atlas://data/images/defaulttheme/spinner'
+        color: color_font
+        option_cls: Factory.get("MySpinnerOption")
+        size_hint: .25, .05
+        pos_hint: {'center_x': .25, 'y':.8}
+
+    Spinner:
+        id: type_depart
+        text: "Departamentos[color=ff3333] *[/color]"
+        markup: True
+        value: []
+        background_color: color_button if self.state == 'normal' else color_button_pressed
+        background_down: 'atlas://data/images/defaulttheme/spinner'
+        color: color_font
+        option_cls: Factory.get("MySpinnerOption")
+        size_hint: .25, .05
+        pos_hint: {'center_x': .5, 'y':.8}
+
+    Spinner:
+        id: type_curso
+        text: "Cursos[color=ff3333] *[/color]"
+        markup: True
+        value: []
+        background_color: color_button if self.state == 'normal' else color_button_pressed
+        background_down: 'atlas://data/images/defaulttheme/spinner'
+        color: color_font
+        option_cls: Factory.get("MySpinnerOption")
+        size_hint: .25, .05
+        pos_hint: {'center_x': .75, 'y':.8}
+
+    Label:
+        text: "Nome[color=ff3333] *[/color]"
+        markup: True
+        text_size: self.size
+        halign: 'left'
+        size_hint: .75, .05
+        color: [0,0,0,1]
+        pos_hint: {'center_x': .5, 'y':.75}
+
+    TextInput:
+        id: nome
+        size_hint: .75, .05
+        pos_hint: {'center_x': .5, 'y':.7}
+
+    Label:
+        text: "CPF[color=ff3333] *[/color]"
+        markup: True
+        text_size: self.size
+        halign: 'left'
+        size_hint: .75, .05
+        color: [0,0,0,1]
+        pos_hint: {'center_x': .5, 'y':.65}
+
+    TextInput:
+        id: cpf
+        size_hint: .75, .05
+        pos_hint: {'center_x': .5, 'y':.6}
+
+    Label:
+        text: "Matrícula[color=ff3333] *[/color]"
+        markup: True
+        text_size: self.size
+        halign: 'left'
+        size_hint: .75, .05
+        color: [0,0,0,1]
+        pos_hint: {'center_x': .5, 'y':.55}
+
+    TextInput:
+        id: matricula
+        size_hint: .75, .05
+        pos_hint: {'center_x': .5, 'y':.5}
+
+    Spinner:
+        id: type_disc
+        text: "Disciplinas"
+        value: []
+        background_color: color_button if self.state == 'normal' else color_button_pressed
+        background_down: 'atlas://data/images/defaulttheme/spinner'
+        color: color_font
+        option_cls: Factory.get("MySpinnerOption")
+        size_hint: .75, .05
+        pos_hint: {'center_x': .5, 'y':.439}
+
+    Button:
+        text: 'Adicionar Aluno'
+        size_hint: .2, .05
+        pos_hint: {'x': .125, 'y':.38}
+        background_color: color_button
+        on_press: root.add_aluno()
+
+    TextInput:
+        id: view
+        size_hint: .75, .27
+        readonly: True
+        pos_hint: {'center_x': .5, 'top':.37}
+
+    Button:
+        text: "Sair"
+        size_hint: .15, .05
+        pos_hint: {'center_x': .25, 'y':.02}
+        background_color: color_button
+        on_press: app.get_running_app().stop()
+
+    Button:
+        text: "Listar"
+        size_hint: .15, .05
+        background_color: color_button
+        pos_hint: {'center_x': .5, 'y':.02}
+        on_press: root.listar()
+
+    Button:
+        text: "Gerar Relatório"
+        size_hint: .15, .05
+        background_color: color_button
+        pos_hint: {'center_x': .75, 'y':.02}
+        on_press: root.gerar_relatorio()
